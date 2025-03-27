@@ -9,10 +9,12 @@ export default function renderMarkUp(responce) {
         return `<li class="gallery-item">
             <a href="${largeImageURL}"><img class="item-image" src="${webformatURL}" alt="${tags}"></a>
             <div class="image-info">
-                <p class="item-likes"><span class="info-accent">Likes</span>${likes}</p>
-                <p class="item-views"><span class="info-accent">Views</span>${views}</p>
-                <p class="item-comments"><span class="info-accent">Comments</span>${comments}</p>
-                <p class="item-downloads"><span class="info-accent">Downloads</span>${downloads}</p>
+                <ul>
+                    <p class="item-likes"><span class="info-accent">Likes</span>${likes}</p>
+                    <p class="item-views"><span class="info-accent">Views</span>${views}</p>
+                    <p class="item-comments"><span class="info-accent">Comments</span>${comments}</p>
+                    <p class="item-downloads"><span class="info-accent">Downloads</span>${downloads}</p>
+                </ul>
             </div>
         </li>`
     }).join("");

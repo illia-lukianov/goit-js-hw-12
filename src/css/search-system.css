@@ -38,6 +38,11 @@ button {
     padding: 8px 16px;
 }
 
+button.load-more-button {
+margin: 0 auto;
+display: flex;
+}
+
 button:hover {
     background: rgb(108, 140, 255);
 }
@@ -46,6 +51,7 @@ button:hover {
     display: flex;
     flex-wrap: wrap;
     gap: 24px;
+    margin-bottom: 25px;
 }
 
 .gallery-item {
@@ -63,7 +69,7 @@ button:hover {
 
 .image-info {
     display: flex;
-    margin: 4px 20px;
+    margin: 20px 4px;
 }
 
 .info-accent{
