@@ -51,6 +51,7 @@ button:hover {
     display: flex;
     flex-wrap: wrap;
     gap: 24px;
+    justify-content: center;
     margin-bottom: 25px;
 }
 
@@ -97,6 +98,14 @@ button:hover {
     text-align: center;
 }
 
+button.load-more-button {
+    margin-bottom: 32px;
+}
+
+button.load-more-button.js-hidden {
+    display: none;
+}
+
 /* #region Loader */
 .loader {
     width: 48px;
@@ -104,7 +113,8 @@ button:hover {
     border: 5px solid;
     border-color: #FF3D00 transparent;
     border-radius: 50%;
-    display: inline-block;
+    display: block;
+    margin: 32px auto 0;
     box-sizing: border-box;
     animation: rotation 1s linear infinite;
 }
@@ -113,9 +123,15 @@ button:hover {
     0% {
         transform: rotate(0deg);
     }
-
+    
     100% {
         transform: rotate(360deg);
     }
 }
+
+.loader.js-hidden {
+    display: none;
+}
+
 /* #endregion */
+

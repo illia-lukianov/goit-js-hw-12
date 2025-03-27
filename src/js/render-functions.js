@@ -8,17 +8,22 @@ export default function renderMarkUp(responce) {
         const { webformatURL, largeImageURL, tags, likes, views, comments, downloads } = image;
         return `<li class="gallery-item">
             <a href="${largeImageURL}"><img class="item-image" src="${webformatURL}" alt="${tags}"></a>
-            <div class="image-info">
-                <ul>
-                    <p class="item-likes"><span class="info-accent">Likes</span>${likes}</p>
-                    <p class="item-views"><span class="info-accent">Views</span>${views}</p>
-                    <p class="item-comments"><span class="info-accent">Comments</span>${comments}</p>
-                    <p class="item-downloads"><span class="info-accent">Downloads</span>${downloads}</p>
+                <ul class = 'image-info'>
+                    <li>
+                        <p class="item-likes"><span class="info-accent">Likes</span>${likes}</p>
+                    </li>
+                    <li>
+                        <p class="item-views"><span class="info-accent">Views</span>${views}</p>
+                    </li>
+                    <li>
+                        <p class="item-comments"><span class="info-accent">Comments</span>${comments}</p>
+                    </li>
+                    <li>
+                        <p class="item-downloads"><span class="info-accent">Downloads</span>${downloads}</p>
+                    </li>
                 </ul>
-            </div>
         </li>`
     }).join("");
-    gallery.innerHTML = '';
     gallery.insertAdjacentHTML('beforeend', markup);
     const lightbox = new SimpleLightbox('.gallery a');
     lightbox.refresh();
