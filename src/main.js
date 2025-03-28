@@ -12,9 +12,6 @@ const paginationButton = document.querySelector('.load-more-button');
 let totalHitsFromPixabay;
 let page = 1;
 
-paginationButton.classList.add('js-hidden');
-loader.classList.add('js-hidden');
-
 form.addEventListener('submit', async event => {
   event.preventDefault();
   const searchData = event.currentTarget.elements.searchText.value.trim();
