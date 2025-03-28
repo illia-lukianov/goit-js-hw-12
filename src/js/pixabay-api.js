@@ -8,8 +8,8 @@ const searchParams = {
   safesearch: 'true',
 }
 
-export default function queryToPixabayApi(searchData, page) {
-  return axios.get("https://pixabay.com/api/", {
+export default async function queryToPixabayApi(searchData, page) {
+  return await axios.get("https://pixabay.com/api/", {
     params: {
       page: page,
       q: searchData,

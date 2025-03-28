@@ -4,6 +4,7 @@ import renderMarkUp from './js/render-functions';
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 
+const lightbox = null;
 const gallery = document.querySelector('.gallery');
 const form = document.querySelector('.form');
 const loader = document.querySelector('.loader');
@@ -32,6 +33,7 @@ form.addEventListener('submit', async event => {
     const responceFromPixabay = responce.data.hits;
     uploadForPage(responceFromPixabay);
     pagination(searchData);
+    validateDataForLightBox(lightbox);
   } catch (error) {
     iziToast.info({
       message: 'Sorry, we have a problems, try later',
@@ -51,6 +53,14 @@ function validateDataFromForm(searchData) {
   return true;
 }
 
+function validateDataForLightBox (lightbox) {
+  if (lightbox) {
+    lightbox.refresh();
+  } else {
+    lightbox = new SimpleLightbox('.gallery a',);
+  }
+}
+
 function uploadForPage (responceFromPixabay) {
   if (!validateDataFromAPI(responceFromPixabay)) {
     loader.classList.add('js-hidden');
@@ -63,7 +73,6 @@ function uploadForPage (responceFromPixabay) {
   loader.classList.add('js-hidden');
   div.classList.remove('center');
   form.reset();
-  scrollPage();
 }
 
 function validateDataFromAPI(responceFromPixabay) {
@@ -98,6 +107,7 @@ function pagination (searchData) {
     try {
       const responceFromPixabay = (await queryToPixabayApi(searchData, page)).data.hits;
       uploadForPage(responceFromPixabay);
+      scrollPage();
       paginationButton.classList.remove('js-hidden');
       loader.classList.add('js-hidden');
     } catch {
