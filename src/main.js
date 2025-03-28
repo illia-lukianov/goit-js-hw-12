@@ -1,5 +1,6 @@
 import queryToPixabayApi from './js/pixabay-api';
 import renderMarkUp from './js/render-functions';
+import { clearGallery } from './js/render-functions';
 
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
@@ -10,12 +11,14 @@ const form = document.querySelector('.form');
 const loader = document.querySelector('.loader');
 const div = document.querySelector('.container');
 const paginationButton = document.querySelector('.load-more-button');
-let totalHitsFromPixabay;
+
+let searchData = '';
+let totalHitsFromPixabay = 0;
 let page = 1;
 
 form.addEventListener('submit', async event => {
   event.preventDefault();
-  const searchData = event.currentTarget.elements.searchText.value.trim();
+  searchData = event.currentTarget.elements.searchText.value.trim();
 
   if (!validateDataFromForm(searchData)) {
     return;
@@ -27,14 +30,14 @@ form.addEventListener('submit', async event => {
   paginationButton.classList.add('js-hidden');
   
   try {
-    gallery.innerHTML = '';
     const responce = (await queryToPixabayApi(searchData, page));
     totalHitsFromPixabay = responce.data.totalHits;
     const responceFromPixabay = responce.data.hits;
+    clearGallery();
     uploadForPage(responceFromPixabay);
     pagination(searchData);
-    validateDataForLightBox(lightbox);
-  } catch (error) {
+  } 
+  catch (error) {
     iziToast.info({
       message: 'Sorry, we have a problems, try later',
     });
@@ -53,21 +56,12 @@ function validateDataFromForm(searchData) {
   return true;
 }
 
-function validateDataForLightBox (lightbox) {
-  if (lightbox) {
-    lightbox.refresh();
-  } else {
-    lightbox = new SimpleLightbox('.gallery a',);
-  }
-}
-
 function uploadForPage (responceFromPixabay) {
   if (!validateDataFromAPI(responceFromPixabay)) {
     loader.classList.add('js-hidden');
     form.reset();
     return;
   };
-  
   renderMarkUp(responceFromPixabay);
   auditForPaginationButton();
   loader.classList.add('js-hidden');
@@ -98,8 +92,9 @@ function auditForPaginationButton () {
   }
 }
 
-function pagination (searchData) {
-  paginationButton.addEventListener('click', async () => {
+paginationButton.addEventListener('click', async () => {pagination(searchData)})
+
+async function pagination (searchData) {
     page +=1;
     paginationButton.classList.add('js-hidden');
     loader.classList.remove('js-hidden');
@@ -115,8 +110,8 @@ function pagination (searchData) {
         message: 'Sorry, we have a problems, try later',
       });
     };
-  });
-};
+  };
+
 
 function scrollPage() {
   const image = gallery.querySelector('.gallery-item'); 
