@@ -35,7 +35,7 @@ form.addEventListener('submit', async event => {
     const responceFromPixabay = responce.data.hits;
     clearGallery();
     uploadForPage(responceFromPixabay);
-    pagination(searchData);
+    // pagination(searchData);
   } 
   catch (error) {
     iziToast.info({
@@ -71,6 +71,7 @@ function uploadForPage (responceFromPixabay) {
 
 function validateDataFromAPI(responceFromPixabay) {
   if (responceFromPixabay.length === 0) {
+    paginationButton.classList.add('js-hidden');
     iziToast.error({
       message:
       'Sorry, there are no images matching your search query. Please try again!',
